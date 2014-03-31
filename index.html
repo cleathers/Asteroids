@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script type="text/javascript" src="./keymaster.js"></script>
+    <script type="text/javascript" src="./Helpers.js"></script>
+    <script type="text/javascript" src="./MovingObject.js"></script>
+    <script type="text/javascript" src="./Asteroid.js"></script>
+    <script type="text/javascript" src="./Ship.js"></script>
+    <script type="text/javascript" src="./Bullet.js"></script>
+    <script type="text/javascript" src="./Game.js"></script>
+  </head>
+  <body>
+
+
+    <script type="text/javascript" charset="utf-8">
+      var canvas = document.createElement('canvas');
+      canvas.width = Asteroids.Game.DIMX;
+      canvas.height = Asteroids.Game.DIMY;
+      canvas.id = 'canvas';
+
+      var c = canvas.getContext('2d');
+      document.body.appendChild(canvas);
+
+      new Asteroids.Game(c).start();
+    </script>
+
+  </body>
+</html>
