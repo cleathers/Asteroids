@@ -9,7 +9,9 @@
   Asteroid.inherits(Asteroids.MovingObject);
 
   // Asteroid Properties
-  Asteroid.COLORS = ['pink', 'blue', 'green', 'red'];
+  var randomColor = function () {
+    return '#'+(0x1000000+(Math.random())*0xffffff).toString(16).substr(1,6);
+  }
   Asteroid.RADIUS = 25;
   Asteroid.SPEED = 2;
   Asteroid.randomDir = function(){
@@ -24,7 +26,7 @@
   Asteroid.randomAsteroid = function(dimX, dimY) {
     var randX = Math.floor(Math.random() * dimX);
     var randY = Math.floor(Math.random() * dimY);
-    var color = Asteroid.COLORS[Math.floor(Math.random() * Asteroid.COLORS.length)];
+    var color = randomColor();
     var radius = Math.floor(Math.random() * Asteroid.RADIUS + 10);
     return new Asteroid([randX, randY], Asteroid.randomSpeed(),
                                 Asteroid.randomDir(), radius, color);
