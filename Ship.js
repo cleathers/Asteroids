@@ -43,9 +43,10 @@
   },
 
   Ship.prototype.fireBullet = function() {
-    var bulletDirection = this.direction;    
+    var bulletDirection = this.direction + Math.PI;    
+    var bulletSpeed = 
     return new Asteroids.Bullet([this.posX, this.posY],
-                                5, bulletDirection);
+                                6, bulletDirection);
   }
 
   Ship.prototype.move = function(dimX, dimY) {
