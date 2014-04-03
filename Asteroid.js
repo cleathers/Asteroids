@@ -22,6 +22,23 @@
     return Math.random() * Asteroid.SPEED;
   }
 
+  Asteroid.prototype.draw = function (ctx) {
+    ctx.strokeStyle = this.color;
+    ctx.beginPath();
+    ctx.lineWidth = 2;
+
+    ctx.arc(
+      this.posX,
+      this.posY,
+      this.radius,
+      0,
+      2 * Math.PI,
+      false
+    );
+
+    ctx.stroke();
+  }
+
 
   Asteroid.randomAsteroid = function(dimX, dimY) {
     var randX = Math.floor(Math.random() * dimX);

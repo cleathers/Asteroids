@@ -5,6 +5,7 @@
     this.asteroids = [];
     this.bullets = [];
     this.ship = new Asteroids.Ship([Game.DIMX/2, Game.DIMY/2]);
+    this.level = 1;
   };
 
   Game.DIMX = 750;
@@ -58,6 +59,11 @@
     this.ctx.clearRect(0, 0, Game.DIMX, Game.DIMY);
 
     var that = this;
+    if (this.asteroids.length == 0) {
+      this.level += 1;
+      $('#level').html('Level: ' + this.level);
+      this.addAsteroids(15 + (this.level * 2));
+    }
     this.asteroids.forEach(function(asteroid) {
       asteroid.draw(that.ctx);
     })
