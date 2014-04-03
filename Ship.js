@@ -11,9 +11,11 @@
   if (Math.random() > 0.5) {
     Ship.VEL *= -1; 
   }
-
   Ship.RADIUS = 10;
   Ship.COLOR = 'black';
+  var randomColor = function () {
+    return '#'+(0x1000000+(Math.random())*0xffffff).toString(16).substr(1,6);
+  }
 
   Ship.prototype.power = function(impulse){
 
@@ -24,7 +26,9 @@
     }
   }
 
+
   Ship.prototype.draw = function (ctx) {
+    this.color = randomColor();
     
     ctx.fillStyle = this.color;
     ctx.save()
@@ -44,9 +48,13 @@
 
   Ship.prototype.fireBullet = function() {
     var bulletDirection = this.direction + Math.PI;    
-    var bulletSpeed = 
+    if (Math.abs(this.speed) > 4.8) {
+      var bulletSpeed = Math.abs(this.speed) + 2;
+    } else {
+      var bulletSpeed = 6;
+    }
     return new Asteroids.Bullet([this.posX, this.posY],
-                                6, bulletDirection);
+                                bulletSpeed, bulletDirection);
   }
 
   Ship.prototype.move = function(dimX, dimY) {
