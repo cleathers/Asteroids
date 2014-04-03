@@ -49,6 +49,12 @@
   Ship.prototype.fireBullet = function() {
     var bulletDirection = this.direction + Math.PI;    
 
+    if (Math.abs(this.speed) > 4.8) {
+      var bulletSpeed = Math.abs(this.speed) + 2;
+    } else {
+      var bulletSpeed = 6;
+    }
+
     return new Asteroids.Bullet([this.posX, this.posY],
                                 bulletSpeed, bulletDirection);
   }
