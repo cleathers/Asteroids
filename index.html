@@ -13,6 +13,9 @@
   </head>
   <body>
   <p id='level'>Level: 1</p>
+  <p>Up/Down Arrows: Propulsion</p>
+  <p>Left/Right Arrows: Turning</p>
+  <p>Spacebar: Fire Bullets</p>
 
 
     <script type="text/javascript" charset="utf-8">
@@ -25,7 +28,22 @@
       document.body.appendChild(canvas);
 
       new Asteroids.Game(c).start();
+
+      $('body').on('click', '#play-again', function (event) {
+        $(event.target).parent().remove();
+        var canvas = document.createElement('canvas');
+        canvas.width = Asteroids.Game.DIMX;
+        canvas.height = Asteroids.Game.DIMY;
+        canvas.id = 'canvas';
+
+        var c = canvas.getContext('2d');
+        document.body.appendChild(canvas);
+
+        new Asteroids.Game(c).start();
+
+      });
     </script>
+
 
   </body>
 </html>

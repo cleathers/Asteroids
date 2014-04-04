@@ -42,17 +42,20 @@
             var bullet = that.ship.fireBullet();
             if (bullet){ that.bullets.push(bullet) };
     });
-  }
+  };
 
 
   Game.prototype.checkCollisions = function(){
     var that = this;
+    var result = true;
     this.asteroids.forEach(function(asteroid){
       if (that.ship.isCollidedWith(asteroid)){
-        console.log('ship death');
+        result = false;
       }
-    });
-  }
+
+    })
+    return result;
+  };
 
 
   Game.prototype.draw = function() {
@@ -85,7 +88,7 @@
         }
       });
     });
-  }
+  };
 
   Game.prototype.move = function() {
     var that = this;
@@ -109,7 +112,7 @@
     if(index !== -1){
       this.asteroids.splice(index, 1);
     }
-  }
+  };
 
   Game.prototype.removeBullet = function(bullet){
     var index = this.bullets.indexOf(bullet);
@@ -121,16 +124,31 @@
   Game.prototype.start = function() {
     this.bindKeyHandlers();
     this.addAsteroids(15);
-    setInterval(this.step.bind(this), 1000 / Game.FPS);
-  }
+    this.interval = setInterval(this.step.bind(this), 1000 / Game.FPS);
+  };
 
   Game.prototype.step = function() {
     this.move();
     this.draw();
-    this.checkCollisions();
+    var collision = this.checkCollisions();
+    if ( collision == false ) {
+      this.restart();
+    }
     this.hitAsteroids();
     this.shipKeyHandlers();
   };
 
+  Game.prototype.restart = function () {
+    window.clearInterval(this.interval);
+    $('canvas').remove();
+    var $p = $('<p>');
+    $p.html("Would you like to play again?");
+    var $button = $('<button>');
+
+    $button.html('More please').attr('id', 'play-again');
+
+    $p.append($button);
+    $('body').append($p);
+  };
 
 })(this);
