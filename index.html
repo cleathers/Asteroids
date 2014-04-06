@@ -15,25 +15,27 @@
   </head>
   <body>
   <div class='container'>
-  <p>
-    <span id='level'>Level: 1</span>
-    <span>Up/Down Arrows: Propulsion</span>
-    <span>Left/Right Arrows: Turning</span>
-    <span>Spacebar: Fire Bullets</span>
-  </p>
+    <p>
+      <span class='white' id='level'>Level: 1</span>
+      <span class='white'>Up/Down Arrows: Propulsion</span>
+      <span class='white'>Left/Right Arrows: Turning</span>
+      <span class='white'>Spacebar: Fire Bullets</span>
+    </p>
+    <div class='row' id='game-area'>
+    </div>
   </div>
 
 
     <script type="text/javascript" charset="utf-8">
-      var $div = $('.container')
+      var $div = $('#game-area')
       var canvas = document.createElement('canvas');
       canvas.width = Asteroids.Game.DIMX;
       canvas.height = Asteroids.Game.DIMY;
       canvas.id = 'canvas';
 
       var background = document.createElement('canvas');
-      background.width = Asteroids.Game.DIMX + 200;
-      background.height = Asteroids.Game.DIMY + 200;
+      background.width = Asteroids.Game.DIMX;
+      background.height = Asteroids.Game.DIMY;
       background.id = 'background';
 
 
@@ -51,8 +53,8 @@
         canvas.id = 'canvas';
 
         var background = document.createElement('canvas');
-        background.width = (Asteroids.Game.DIMX * 2);
-        background.height = (Asteroids.Game.DIMY * 2);
+        background.width = Asteroids.Game.DIMX;
+        background.height = Asteroids.Game.DIMY;
         background.id = 'background';
 
         var c = canvas.getContext('2d');

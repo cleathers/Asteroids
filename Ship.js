@@ -47,7 +47,7 @@
   },
 
   Ship.prototype.fireBullet = function() {
-    var bulletDirection = this.direction + Math.PI;    
+    var bulletDirection = this.direction + Math.PI;
 
     if (Math.abs(this.speed) > 4.8) {
       var bulletSpeed = Math.abs(this.speed) + 2;

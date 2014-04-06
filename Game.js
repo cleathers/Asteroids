@@ -11,6 +11,9 @@
   Game.DIMX = 700;
   Game.DIMY = 700;
   Game.FPS = 60;
+  var randomColor = function () {
+    return '#'+(0x1000000+(Math.random())*0xffffff).toString(16).substr(1,6);
+  }
 
   Game.prototype.addAsteroids = function(numAsteroids) {
     for (var i = 0; i < numAsteroids; i++) {
@@ -57,16 +60,21 @@
     return result;
   };
 
-
-  Game.prototype.draw = function() {
-    this.ctx.clearRect(0, 0, Game.DIMX, Game.DIMY);
-
-    var that = this;
+  Game.prototype.checkLevel = function () {
     if (this.asteroids.length == 0) {
       this.level += 1;
       $('#level').html('Level: ' + this.level);
       this.addAsteroids(15 + (this.level * 2));
     }
+  };
+
+
+  Game.prototype.draw = function() {
+    this.ctx.clearRect(0, 0, Game.DIMX, Game.DIMY);
+
+    var that = this;
+    this.checkLevel();
+
     this.asteroids.forEach(function(asteroid) {
       asteroid.draw(that.ctx);
     })
@@ -80,10 +88,11 @@
 
   Game.prototype.hitAsteroids = function() {
     var that = this;
+
     this.asteroids.forEach(function(asteroid){
       that.bullets.forEach(function(bullet){
         if(bullet.isCollidedWith(asteroid)){
-          that.removeAsteroid(asteroid);
+          that.removeOrSplitAsteroid(asteroid);
           that.removeBullet(bullet);
         }
       });
@@ -107,11 +116,29 @@
     });
   };
 
-  Game.prototype.removeAsteroid = function(asteroid){
+  Game.prototype.removeOrSplitAsteroid = function(asteroid){
+    debugger
+
     var index = this.asteroids.indexOf(asteroid);
     if(index !== -1){
       this.asteroids.splice(index, 1);
     }
+
+    var splitSize = 15 - this.level;
+
+    if ( asteroid.radius > 15 ) {
+      var pos = [asteroid.posX, asteroid.posY];
+      var speed = asteroid.speed * .8;
+      var dir1 = asteroid.direction + Math.PI/3;
+      var dir2 = asteroid.direction - Math.PI/3;
+      var radius = asteroid.radius * .6;
+
+      this.asteroids.push(new Asteroids.Asteroid(pos, speed, dir1, radius, randomColor()));
+      this.asteroids.push(new Asteroids.Asteroid(pos, speed, dir2, radius, randomColor()));
+
+    }
+
+
   };
 
   Game.prototype.removeBullet = function(bullet){
@@ -123,7 +150,7 @@
 
   Game.prototype.start = function() {
     this.bindKeyHandlers();
-    this.addAsteroids(15);
+    this.addAsteroids(10);
     this.interval = setInterval(this.step.bind(this), 1000 / Game.FPS);
   };
 
@@ -142,13 +169,14 @@
     window.clearInterval(this.interval);
     $('canvas').remove();
     var $p = $('<p>');
+    $p.addClass('white');
     $p.html("Would you like to play again?");
     var $button = $('<button>');
+    $button.addClass('btn btn-teal');
 
     $button.html('More please').attr('id', 'play-again');
 
-    $p.append($button);
-    $('body').append($p);
+    $('#game-area').append($p).append($button);
   };
 
 })(this);
