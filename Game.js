@@ -8,13 +8,13 @@
     this.level = 1;
   };
 
-  Game.DIMX = 750;
+  Game.DIMX = 700;
   Game.DIMY = 700;
   Game.FPS = 60;
 
   Game.prototype.addAsteroids = function(numAsteroids) {
     for (var i = 0; i < numAsteroids; i++) {
-      this.asteroids.push(Asteroids.Asteroid.randomAsteroid(Game.DIMX, Game.DIMY));
+      this.asteroids.push(Asteroids.Asteroid.randomAsteroid(Game.DIMX, Game.DIMY, this.ship));
     }
   };
 

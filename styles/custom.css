@@ -1,3 +1,50 @@
-canvas {
-  background: url(../images/lotsoflasers.jpg);
+
+#background {
+  position: absolute;
+  z-index: -1;
+  background: url(../images/star_trails.jpg);
+
+  top: -300px;
+  left: -300px;
+  background-position: 60% 60%;
+  height: 2000px;
+  width: 2000px;
+
+
+  -webkit-animation: spin 40s infinite linear;
+  -moz-animation: spin 40s infinite linear;
+  -ms-animation: spin 40s infinite linear;
+  -o-animation: spin 40s infinite linear;
+
+  -webkit-transform-origin: 38% 30%;
+  -moz-transform-origin: 38% 30%;
+  -ms-transform-origin: 38% 30%;
+  -o-transform-origin: 38% 30%;
+
+}
+
+#canvas {
+  border: 2px solid red;
+}
+
+.container {
+  position: relative;
+  height: 750px;
+  width: 750px;
+  overflow: hidden;
+}
+
+@-webkit-keyframes spin {
+  from { -webkit-transform: rotate(0deg); }
+  to { -webkit-transform: rotate(360deg); }
+}
+
+@-moz-keyframes spin {
+  from { -moz-transform: rotate(0deg); }
+  to { -moz-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
