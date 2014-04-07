@@ -46,7 +46,7 @@
       new Asteroids.Game(c).start();
 
       $('body').on('click', '#play-again', function (event) {
-        $(event.target).parent().remove();
+        $(event.target).parent().empty();
         var canvas = document.createElement('canvas');
         canvas.width = Asteroids.Game.DIMX;
         canvas.height = Asteroids.Game.DIMY;
@@ -58,8 +58,8 @@
         background.id = 'background';
 
         var c = canvas.getContext('2d');
-        document.body.appendChild(background);
-        document.body.appendChild(canvas);
+        $div.append(background);
+        $div.append(canvas);
 
         new Asteroids.Game(c).start();
 

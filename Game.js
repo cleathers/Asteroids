@@ -117,7 +117,6 @@
   };
 
   Game.prototype.removeOrSplitAsteroid = function(asteroid){
-    debugger
 
     var index = this.asteroids.indexOf(asteroid);
     if(index !== -1){
