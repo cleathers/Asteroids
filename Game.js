@@ -92,7 +92,7 @@
     this.asteroids.forEach(function(asteroid){
       that.bullets.forEach(function(bullet){
         if(bullet.isCollidedWith(asteroid)){
-          that.removeOrSplitAsteroid(asteroid);
+          that.removeOrSplitAsteroid(asteroid, bullet);
           that.removeBullet(bullet);
         }
       });
@@ -116,7 +116,7 @@
     });
   };
 
-  Game.prototype.removeOrSplitAsteroid = function(asteroid){
+  Game.prototype.removeOrSplitAsteroid = function(asteroid, bullet){
 
     var index = this.asteroids.indexOf(asteroid);
     if(index !== -1){
@@ -128,8 +128,8 @@
     if ( asteroid.radius > 15 ) {
       var pos = [asteroid.posX, asteroid.posY];
       var speed = asteroid.speed * .8;
-      var dir1 = asteroid.direction + Math.PI/3;
-      var dir2 = asteroid.direction - Math.PI/3;
+      var dir1 = bullet.direction + Math.PI/3;
+      var dir2 = bullet.direction - Math.PI/3;
       var radius = asteroid.radius * .6;
 
       this.asteroids.push(new Asteroids.Asteroid(pos, speed, dir1, radius, randomColor()));
