@@ -46,23 +46,19 @@
     var color = randomColor();
     var radius = Math.floor(Math.random() * Asteroid.RADIUS + 10);
 
-
-    var condish1 = (randX + radius <= ship.posX + ship.radius + 200 && 
+    var condish1 = function () {
+              return (randX + radius <= ship.posX + ship.radius + 200 && 
                     randX + radius >= ship.posX + ship.radius - 200);
-    var condish2 = (randY + radius <= ship.posY + ship.radius + 200 && 
+    }
+    var condish2 = function () {
+              return (randY + radius <= ship.posY + ship.radius + 200 && 
                     randY + radius >= ship.posY + ship.radius - 200);
+    }
     
-    while ( condish2 || condish1 ) {
-      if ( condish1 ) {
-        var randX = Math.floor(Math.random() * dimX);
-        var condish1 = (randX + radius <= ship.posX + ship.radius + 200 && 
-                        randX + radius >= ship.posX + ship.radius - 200);
-      }
-      if ( condish2 ) {
-        var randY = Math.floor(Math.random() * dimY);
-        var condish2 = (randY + radius <= ship.posY + ship.radius + 200 && 
-                        randY + radius >= ship.posY + ship.radius - 200);
-      }
+    while ( condish2() || condish1() ) {
+      condish1() ?
+        randX = Math.floor(Math.random() * dimX) :
+        randY = Math.floor(Math.random() * dimY);
     }
     
     return new Asteroid([randX, randY], Asteroid.randomSpeed(),
