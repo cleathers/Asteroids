@@ -3,4 +3,4 @@ Asteroids
 
 A trivial implementation of asteroids
 
-Open `index.html` in chrome and enjoy.
+Visit 'cleathers.github.io/Asteroids' to play!
